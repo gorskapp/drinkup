@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="input-group mb-3">
+    <input #searchValue id="search-box" type="text" class="form-control" placeholder="Enter coctail name" aria-label="Enter coctail name">
+    <div class="input-group-append">
+      <button (click)="searchByCoctailName(searchValue.value)" class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div *ngIf="notFound === true; then noDrinks else drinksList"></div>
+  <ng-template #noDrinks>
+    Sorry, no drinks matching given name!
+  </ng-template>
+  <ng-template #drinksList>
+    <div class="row row-cols-md-4 row-cols-md-3 g-4">
+      <div *ngFor="let drink of drinks$" class="col">
+        <div class="card shadow-sm h-100">
+          <img src={{drink.strDrinkThumb}} class="bd-placeholder-img card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{drink.strDrink}}</h5>
+            <a (click)="goToCoctailDetails(drink.idDrink)" class="card-link">See more</a>
+            </div>
+            <div class="card-footer">
+              <small class="text-body-secondary">{{drink.strAlcoholic}}</small>
+            </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
